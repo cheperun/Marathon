@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="{{ static_url('estilos.css') }}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<h3>Slices Creation</h3>
+
+<div class="container">
+  <form method="POST">
+    <label>RS Name:</label>
+    <input type="text" name="rs_name"/><br>
+    <label>Network End Point_VUE:</label>
+    <input type="text" name="nep_vue"/><br>
+    <label>Network End Point_VBS:</label>
+    <input type="text" name="nep_vbs"/><br>
+    
+
+    <label >Channel Bandwidth_Min:</label>
+    <input type="text" name="channelbw_min"/><br>
+    <label>Channel Bandwidth_Max:</label>
+    <input type="text" name="channelbw_max"/><br>
+    <label>Channel Sharing Policy: </label>
+    <input type="text" name="channelsharingpool"/><br>
+    <label>Channel Air Time Policy:</label>
+    <input type="text" name="chairpolicy"/><br>
+    <label>Channel Air Time Min Ratio:</label>
+    <input type="text" name="chairminratio"/><br>
+    <label>Channel Air Time Max Ratio:</label>
+    <input type="text" name="chairmaxratio"/><br>
+    <label>Channel Air Tiem Averaging Interval:</label>
+    <input type="text" name="chairavgint"/><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
