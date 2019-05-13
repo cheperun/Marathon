@@ -20,10 +20,10 @@ from slice import Slices
 
 
 class Slice:
-    def __init__(self):
+    def __init__(self,client,ue):
         print ("hola")
-        #self.client = client
-        #self.ue = ue
+        self.client = client
+        self.ue = ue
 
     
         
@@ -96,7 +96,7 @@ def main():
     #    sys.exit(1)
 
     # put both the client and the ue in a slice class.
-    slice1 = Slice( client1, ue1)
+    #slice1 = Slice( client1, ue1)
     # This configuration is just to "clear" the offsets in the gnuradio file.
     # Dont remove it.
     #slice1.allocate_tx(2.43e9 - 300e3, 400e3)

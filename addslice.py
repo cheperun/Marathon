@@ -8,7 +8,7 @@ import tornado.ioloop
 import tornado.web, tornado.options
 import slice
 import json
-from slice_manager import Slice
+from slice_manager import *
 import hydra
 import xmlrpclib
 
