@@ -40,22 +40,24 @@ class add(tornado.web.RequestHandler):
         res_id_3=self.slices.exist_slice("3")
         if not res_id_1:
             id="1"
-            #client = hydra.hydra_client("192.168.5.70", 5000, 1, True)
-            #ue = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
-            slice1=Slice()
-            slice1.allocate_tx(channelbw_min,nep_vbs)
+            logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
+            logging.info("Configuration of Hydra client1 or client2")
+            logging.info("Configuration of vbs")
+            logging.info("Configuration of vue1, vue2 or vue3")
         elif not res_id_2:
             id="2"
-            #client = hydra.hydra_client("192.168.5.70", 5000, 1, True)
-            #ue = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
-            slice2=Slice()
-            slice2.allocate_tx(channelbw_min,nep_vbs)
+            logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
+            logging.info("Configuration of Hydra client1 or client2")
+            logging.info("Configuration of vbs")
+            logging.info("Configuration of vue1, vue2 or vue3")
+            
         elif not res_id_3:
             id="3"
-            #client = hydra.hydra_client("192.168.5.70", 5000, 1, True)
-            #ue = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
-            slice3=Slice()
-            slice3.allocate_tx(channelbw_min,nep_vbs)
+            logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
+            logging.info("Configuration of Hydra client1 or client2")
+            logging.info("Configuration of vbs")
+            logging.info("Configuration of vue1, vue2 or vue3")
+            
         else:
             id="0"
         if id == "0":
