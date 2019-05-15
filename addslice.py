@@ -8,7 +8,7 @@ import tornado.ioloop
 import tornado.web, tornado.options
 import slice
 import json
-from slice_manager import *
+
 import hydra
 import xmlrpclib
 
@@ -40,12 +40,14 @@ class add(tornado.web.RequestHandler):
         res_id_3=self.slices.exist_slice("3")
         if not res_id_1:
             id="1"
+            main(id,"add")
             logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
             logging.info("Configuration of Hydra client1 or client2")
             logging.info("Configuration of vbs")
             logging.info("Configuration of vue1, vue2 or vue3")
         elif not res_id_2:
             id="2"
+            main(id,"add")
             logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
             logging.info("Configuration of Hydra client1 or client2")
             logging.info("Configuration of vbs")
@@ -53,6 +55,7 @@ class add(tornado.web.RequestHandler):
             
         elif not res_id_3:
             id="3"
+            main(id,"add")
             logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
             logging.info("Configuration of Hydra client1 or client2")
             logging.info("Configuration of vbs")

@@ -10,7 +10,7 @@ import tornado.ioloop
 import tornado.web, tornado.options
 import json
 import os
-from slice import Slices
+from slice import Slice_Param
 
 
 
@@ -80,7 +80,7 @@ class Slice:
     
      
 
-def main():
+#def main():
     ## IMPORTANT: The script ansible_hydra_client_2tx_2rx already allocated resources for transmission and reception
     ##            These resources are under the use of clients ID 1 and ID 2. The trick of this script is to connect
     #           with the server using the same ID (1 and 2), and them releasing the resources allocated.
@@ -102,18 +102,70 @@ def main():
     #slice1.allocate_tx(2.43e9 - 300e3, 400e3)
     #slice1.allocate_rx(2.43e9 + 3e6 - 300e3, 400e3)
 
-    if (True):
+  #  if (True):
         # We put the IP of the machine executing this script
-        client2 = hydra.hydra_client("192.168.5.70", 5000, 2, True)
+   #     client2 = hydra.hydra_client("192.168.5.70", 5000, 2, True)
         # We put the IP of the machine running the UE
-        ue2 = xmlrpclib.ServerProxy("http://192.168.5.81:8080")
+    #    ue2 = xmlrpclib.ServerProxy("http://192.168.5.81:8080")
 
-        if client2.check_connection(3) == "":
-            print("client2 could not connect to server")
-            sys.exit(1)
-        slice2 = Slice( client2, ue2)
-        slice2.allocate_tx(2.43e9 + 200e3, 200e3)
-        slice2.allocate_rx(2.43e9 + 3e6 + 200e3, 200e3)
+    #    if client2.check_connection(3) == "":
+    #        print("client2 could not connect to server")
+    #        sys.exit(1)
+    #    slice2 = Slice( client2, ue2)
+    #    slice2.allocate_tx(2.43e9 + 200e3, 200e3)
+    #    slice2.allocate_rx(2.43e9 + 3e6 + 200e3, 200e3)
+def main(id,page):
+    
+    
+    #client1 = hydra.hydra_client("192.168.5.70", 5000, 1, True)
+    #ue1 = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
+    #client2 = hydra.hydra_client("192.168.5.70", 5000, 1, True)
+    #ue2 = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
+    
 
 
+    ## IMPORTANT: The script ansible_hydra_client_2tx_2rx already allocated resources for traNsmission and reception
+    ##            These resources are under the use of clients ID 1 and ID 2. The trick of this script is to connect
+    #           with the server using the same ID (1 and 2), and them releasing the resources allocated.
+    #           We can then allocate new resources from this python without impacting the slices. 
+    
+
+
+    #Start Hydra Clients          
+    # We put the IP of the machine executing this script
+    
+    #client1 = hydra.hydra_client("192.168.5.70", 5000, 1, True)
+    #if client1.check_connection(3) == "":
+    #    print("client1 could not connect to server")
+    #    sys.exit(1)
+    logging.info("Hydra client 1 connected to server")
+
+
+    # We put the IP of the machine executing this script
+    #client2 = hydra.hydra_client("192.168.5.70", 5000, 2, True)
+    #if client2.check_connection(3) == "":
+    #    print("client2 could not connect to server")
+    #    sys.exit(1)
+    logging.info("Hydra client 2 connected to server")
+
+
+    #Start VBS Connection
+    logging.info("VBS connection established")
+
+
+
+    #Start VUE Connections 
+    # We put the IP of the machine running the UE
+    #vue1 = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
+    logging.info("VUE#1 connection established")
+
+    # We put the IP of the machine running the UE
+    
+    logging.info("VUE#2 connection established")
+
+    # We put the IP of the machine running the UE
+    
+    logging.info("VUE#3 connection established")
+    
+    
   

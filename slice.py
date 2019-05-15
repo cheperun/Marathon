@@ -1,7 +1,7 @@
 import json
 
 
-class Slices:
+class Slice_Param:
 
     def __init__(self):
         self.slices = []

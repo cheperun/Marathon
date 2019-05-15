@@ -26,4 +26,5 @@ class modify(tornado.web.RequestHandler):
         self.slices.update_key('chairminratio',self.get_argument('chairminratio'),id)
         self.slices.update_key('chairmaxratio',self.get_argument('chairmaxratio'),id)
         self.slices.update_key('chairavgint',self.get_argument('chairavgint'),id)
+        main(id,"add")
         self.render("templates/modify2.html",id=id)
