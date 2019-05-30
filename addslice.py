@@ -1,19 +1,16 @@
 #!/usr//bin/env python2
 
 import sys, time
-
+import hydra
 import logging
 #import logging.config
 import tornado.ioloop
 import tornado.web, tornado.options
 import slice
 import json
-
-import hydra
 import xmlrpclib
+import os
 
-
-logging.getLogger().setLevel(logging.INFO)
 
 class add(tornado.web.RequestHandler):
     def initialize(self,slices):
@@ -37,35 +34,30 @@ class add(tornado.web.RequestHandler):
         chairavgint=self.get_argument('chairavgint')
         res_id_1=self.slices.exist_slice("1")
         res_id_2=self.slices.exist_slice("2")
-        res_id_3=self.slices.exist_slice("3")
+        # res_id_3=self.slices.exist_slice("3")
         if not res_id_1:
             id="1"
-            main(id,"add")
             logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
             logging.info("Configuration of Hydra client1 or client2")
-            logging.info("Configuration of vbs")
-            logging.info("Configuration of vue1, vue2 or vue3")
+            # We put the IP of the machine executing this script
+            #slice.create("1")
+            logging.info("Configuration of vbs") #?????????????????
+            logging.info("Configuration of vue1")
+            
         elif not res_id_2:
             id="2"
-            main(id,"add")
             logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
             logging.info("Configuration of Hydra client1 or client2")
-            logging.info("Configuration of vbs")
-            logging.info("Configuration of vue1, vue2 or vue3")
             
-        elif not res_id_3:
-            id="3"
-            main(id,"add")
-            logging.info("Processing Slice Attributes. Deciding what to send to the corresponding Hydra clients, VBS and VUE")
-            logging.info("Configuration of Hydra client1 or client2")
-            logging.info("Configuration of vbs")
-            logging.info("Configuration of vue1, vue2 or vue3")
+            logging.info("Configuration of vbs")#?????????????????
+            logging.info("Configuration of vue2")
             
+                  
         else:
             id="0"
         if id == "0":
             self.render("templates/error_ad.html",id=id)
-            print "Error. Slice" +id+ " exist" 
+            print "Error. Slice" +id+ " exist. The maximun number of slices is 2." 
         else:    
             slic = {
                 "id" : id,
@@ -80,8 +72,10 @@ class add(tornado.web.RequestHandler):
                 "chairmaxratio" : chairmaxratio,
                 "chairavgint" : chairavgint,
             }
-            print id
+                      
             result=self.slices.add_slice(id,rs_name,nep_vbs,nep_vue,channelbw_min,channelbw_max,channelsharingpool,chairpolicy,chairminratio,chairmaxratio,chairavgint)
+            
+            slice.create(result)
             logging.info("El Slice  ha sido introducido Correctamente")
             self.render("templates/addslice2.html",id=id)
 

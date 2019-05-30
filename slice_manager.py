@@ -21,7 +21,6 @@ from slice import Slice_Param
 
 class Slice:
     def __init__(self,client,ue):
-        print ("hola")
         self.client = client
         self.ue = ue
 
@@ -114,10 +113,10 @@ class Slice:
     #    slice2 = Slice( client2, ue2)
     #    slice2.allocate_tx(2.43e9 + 200e3, 200e3)
     #    slice2.allocate_rx(2.43e9 + 3e6 + 200e3, 200e3)
-def main(id,page):
+def create(id):
     
     
-    #client1 = hydra.hydra_client("192.168.5.70", 5000, 1, True)
+    client1 = hydra.hydra_client("192.168.5.70", 5000, 1, "True")
     #ue1 = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
     #client2 = hydra.hydra_client("192.168.5.70", 5000, 1, True)
     #ue2 = xmlrpclib.ServerProxy("http://192.168.5.78:8080")

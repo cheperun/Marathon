@@ -10,16 +10,16 @@ from delslice import delete
 from modify import modify
 from view import view
 from slice import Slice_Param
-from slice_manager import main
+
 import hydra
 import xmlrpclib
 import logging
 import logging.config
 
+logging.getLogger().setLevel(logging.INFO)
 slices=Slice_Param()
 
 
-    
 
 settings = {
     "debug": True,
@@ -37,7 +37,6 @@ app2 = tornado.web.Application([
     
 ], **settings )
 if __name__ == "__main__":
-    main('0',"main")
     app2.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
     logging.info("Web server started. Listening in port 8888")
