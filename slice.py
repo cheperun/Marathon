@@ -104,7 +104,7 @@ class Slice:
 
         # Configure TX freq for slice
         print("Configure TX")
-        spectrum_conf = hydra.rx_configuration(freq, bandwidth, False)
+        spectrum_conf = hydra.rx_configuration(freq, bandwidth, False) 
         print("Spectrum Configuration")
         ret = self.hydra.request_tx_resources( spectrum_conf )
 
@@ -130,33 +130,64 @@ class Slice:
             return -1
 
         self.freqtx = freq
+        self.bw = bandwidth
         return 0
 
     def allocate_rx(self, freq, bandwidth):
         # Configure RX freq for slice
         spectrum_conf = hydra.rx_configuration(freq, bandwidth, False)
-        ret = self.client.request_rx_resources( spectrum_conf )
+        ret = self.hydra.request_rx_resources( spectrum_conf )
 
         if (ret < 0):
-            print "Error allocating TX resources: freq: %f, bandwidth %f" % (freq, bandwidth) 
+            print "Error allocating RX resources: freq: %f, bandwidth %f" % (freq, bandwidth)
 
-        #  Configure the RX freq for UE (to receive from the slice)
+        #  Configure the TX freq for UE (to transmitt to the slice)
         self.ue.set_freqtx(freq)
         self.ue.set_vr1offset(0)
         self.ue.set_vr2offset(0)
         self.ue.set_samp_rate(bandwidth)
 
         if (self.ue.get_freqtx() != freq or self.ue.get_samp_rate() != bandwidth):
-            print "Error allocating UE TX resources: freq: %f, bandwidth %f" % (freq, bandwidth) 
+            print "Error allocating UE TX resources: freq: %f, bandwidth %f" % (freq, bandwidth)
             return -1
 
         self.freqrx = freq
         self.bw = bandwidth
         return 0
+
     
 def create(result):
-    y=json.loads(result)
-    print y
+    
+    # We put the IP of the machine executing this script (This is for the server updates)
+    hydra1 = hydra.hydra_client("147.83.105.233", 5000, 1, True)
+    # We put the IP of the machine running the UE (this is for the RX updates)
+    ue1 = xmlrpclib.ServerProxy("http://147.83.105.145:8080")
+    # We put the IP of the machine running the client (this is for the client updates)
+    client1 = xmlrpclib.ServerProxy("http://147.83.105.233:8080")
+    
+    if hydra1.check_connection(3) == "":
+        print("client1 could not connect to server")
+        sys.exit(1)
+
+    slice1 = Slice(1, hydra1, client1, ue1)
+    #slice2 = Slice(2, hydra2, client2, ue2)
+    freqtx=1.43e9
+    freqrx=1.43e9 + 3e6 
+    if result == "init":
+       
+       slice1.allocate_tx(freqtx , 400e3, 0.04)
+       slice1.allocate_rx(freqrx , 400e3)
+    else:
+        
+       y=json.loads(result)
+       x=y['channelbw_min']
+       bw=float(x)
+     #  if y['id']=="1":       
+       slice1.allocate_tx(freqtx,bw,0.05)
+       slice1.allocate_rx(freqrx,bw) 
+      # elseif y['id']=="2":       
+    #     slice2.allocate_tx(freqtx,bw,0.05)
+       #     slice2.allocate_rx(freqrx,bw) 
     #sli=Slice_Param()
     #result=sli.get_slice(id)
     #if result:

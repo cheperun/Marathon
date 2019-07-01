@@ -9,7 +9,7 @@ from getslice import get
 from delslice import delete
 from modify import modify
 from view import view
-from slice import Slice_Param
+from slice import *
 
 import hydra
 import xmlrpclib
@@ -18,7 +18,7 @@ import logging.config
 
 logging.getLogger().setLevel(logging.INFO)
 slices=Slice_Param()
-
+create('init')
 
 
 settings = {
