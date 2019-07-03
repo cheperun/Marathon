@@ -160,23 +160,21 @@ def create(result):
     
     # We put the IP of the machine executing this script (This is for the server updates)
     hydra1 = hydra.hydra_client("147.83.105.233", 5000, 1, True)
-    hydra2 = hydra.hydra_client("147.83.105.233", 5000, 1, True)
+    
     # We put the IP of the machine running the UE (this is for the RX updates)
     ue1 = xmlrpclib.ServerProxy("http://147.83.105.145:8080")
-    ue2 = xmlrpclib.ServerProxy("http://147.83.105.145:8080")
+    
     # We put the IP of the machine running the client (this is for the client updates)
     client1 = xmlrpclib.ServerProxy("http://147.83.105.233:8080")
-    client2 = xmlrpclib.ServerProxy("http://147.83.105.233:8080")
+    
     
     if hydra1.check_connection(3) == "":
         print("client1 could not connect to server")
         sys.exit(1)
-    if hydra1.check_connection(3) == "":
-        print("client2 could not connect to server")
-        sys.exit(1)
+    
 
     slice1 = Slice(1, hydra1, client1, ue1)
-    slice2 = Slice(2, hydra2, client2, ue2)
+    
     freqtx=1.43e9
     freqrx=1.43e9 + 3e6 
     if result == "init":
@@ -188,25 +186,10 @@ def create(result):
        y=json.loads(result)
        x=y['channelbw_min']
        bw=float(x)
-       if y['id']=="1":       
-        slice1.allocate_tx(freqtx,bw,0.05)
-        slice1.allocate_rx(freqrx,bw) 
-       else:
-        slice2.allocate_tx(freqtx,bw,0.05)
-        slice2.allocate_rx(freqrx,bw) 
-    #sli=Slice_Param()
-    #result=sli.get_slice(id)
-    #if result:
-    #    print "hola farigolete"
-    #else:
-    #    print "no hay na"
-    #print id
-    #client1 = hydra.hydra_client("192.168.5.70", 5000, 1, "True")
-    #ue1 = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
-    #client2 = hydra.hydra_client("192.168.5.70", 5000, 1, True)
-    #ue2 = xmlrpclib.ServerProxy("http://192.168.5.78:8080")
+       slice1.allocate_tx(freqtx,bw,0.05)
+       slice1.allocate_rx(freqrx,bw) 
     
-
+    
 
     ## IMPORTANT: The script ansible_hydra_client_2tx_2rx already allocated resources for traNsmission and reception
     ##            These resources are under the use of clients ID 1 and ID 2. The trick of this script is to connect
