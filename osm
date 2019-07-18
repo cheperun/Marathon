@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+case "$1" in
+   "i")
+      osm vnfd-create hydra_server_vnf.tar.gz
+      osm vnfd-create hydra_client_2tx_2rx_vnf.tar.gz
+      osm vnfd-create hydra_rx1_vnf.tar.gz
+      osm vnfd-create hydra_rx2_vnf.tar.gz
+      osm nsd-create  hydra_basic_ns.tar.gz
+   ;;
+   "l")
+#      osm vnfd-list
+#      osm nsd-list
+      osm ns-list
+   ;;
+   "d")
+      osm nsd-delete hydra_basic_nsd
+      osm vnfd-delete hydra_server
+      osm vnfd-delete hydra_client_2tx_2rx
+      osm vnfd-delete hydra_rx1
+      osm vnfd-delete hydra_rx2
+   ;;
+   "nc")
+      ./osm d
+      ./osm i
+      #osm ns-create --ns_name $2 --nsd_name hydra_basic_nsd --vim_account PREPRODUCTION
+      osm ns-create --ns_name $2 --nsd_name hydra_basic_nsd --vim_account PRODUCTION_WINS_5G
+   ;;
+   "nd")
+      osm ns-delete $2
+      osm nsd-delete hydra_basic_nsd
+   ;;
+   "jd")
+      juju remove-application $2-b-vnfd
+      juju remove-application $2-c-vnfd
+      juju remove-application $2-d-vnfd
+      juju remove-application $2-e-vnfd
+   ;;
+   *)
+      echo "[i]nstall all VNFDs/NSDs. Example: $1 i"
+      echo "[l]ist. Example: $i l"
+      echo "[d]elete all NSDs/VNFDs. Example: $1 d"
+      echo "[nc]s-create a NS. Example: $1 nc <name of NS>"
+      echo "[nd]s-delete a NS. Example: $1 nd <name of NS>"
+      echo "[jd]uju-delete a juju-application (executes the ANSIBLE configuration). Example: $1 jd <name of application>"
+   ;;
+esac
