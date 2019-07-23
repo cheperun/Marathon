@@ -23,6 +23,9 @@ nsd-catalog:
     - member-vnf-index: 4
       vnfd-id-ref: hydra_client_2tx_2rx
       start-by-default: true
+    - member-vnf-index: 5
+      vnfd-id-ref: hydra_rx3
+      start-by-default: true
 
     vld:
     - id: hydra_nsd_vld4
@@ -39,6 +42,9 @@ nsd-catalog:
         vnfd-connection-point-ref: ens4
       - member-vnf-index-ref: 4
         vnfd-connection-point-ref: ens4
+      - member-vnf-index-ref: 5
+        vnfd-connection-point-ref: ens4
+
     - id: hydra_nsd_vld1
       mgmt-network: 'true'
       name: hydra_nsd_vld1
@@ -54,6 +60,9 @@ nsd-catalog:
         vnfd-connection-point-ref: ens1
       - member-vnf-index-ref: 4
         vnfd-connection-point-ref: ens1
+      - member-vnf-index-ref: 5
+        vnfd-connection-point-ref: ens1
+
     - id: hydra_nsd_vld3
       name: hydra_nsd_vld3
       short-name: hydra_nsd_vld3
@@ -68,6 +77,8 @@ nsd-catalog:
         vnfd-connection-point-ref: ens5
       - member-vnf-index-ref: 4
         vnfd-connection-point-ref: ens5
+      - member-vnf-index-ref: 5
+        vnfd-connection-point-ref: ens5
     - id: hydra_nsd_vld2
       name: hydra_nsd_vld2
       short-name: hydra_nsd_vld2
@@ -79,4 +90,6 @@ nsd-catalog:
       - member-vnf-index-ref: 2
         vnfd-connection-point-ref: ens7
       - member-vnf-index-ref: 3
+        vnfd-connection-point-iref: ens7
+      - member-vnf-index-ref: 5 
         vnfd-connection-point-ref: ens7

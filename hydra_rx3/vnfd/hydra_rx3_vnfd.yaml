@@ -1,9 +1,9 @@
 vnfd-catalog:
   vnfd:
-  - id: hydra_rx1
-    name: hydra_rx1
-    short-name: hydra_rx1
-    description: RX for VR1
+  - id: hydra_rx3
+    name: hydra_rx3
+    short-name: hydra_rx3
+    description: RX for VR3
 
     vendor: 5GINFIRE
     version: '1.0'
@@ -26,9 +26,9 @@ vnfd-catalog:
         type: VPORT
 
     vdu:
-    - id: hydra_rx1-VM
-      name: hydra_rx1-VM
-      description: RX1 VM.
+    - id: hydra_rx3-VM
+      name: hydra_rx3-VM
+      description: RX3 VM.
       image: hydra-aas
       count: 1
 #     guest-epa:
