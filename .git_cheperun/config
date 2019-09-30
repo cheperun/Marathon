@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/cheperun/Marathon.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "ansible2"]
+	remote = origin
+	merge = refs/heads/ansible2
